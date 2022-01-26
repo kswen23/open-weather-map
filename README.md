@@ -1,1 +1,1 @@
-# open-weather-map
+# open-wheather-map
