@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class WeatherListCoordinator: Coordinator {
+class WeatherListCoordinator: NSObject, Coordinator {
 
-    var childCoordinators: [Coordinator] = []
+    var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     var diContainer = WeatherListDIContainer()
     
@@ -20,8 +20,17 @@ class WeatherListCoordinator: Coordinator {
     
     func start() {
         let viewController = diContainer.makeWeatherListViewController(coordinaitor: self)
+        viewController.coordinator = self
         self.navigationController.pushViewController(viewController, animated: false)
     }
+    
+    func pushDetailWeatherView(city: WeatherModel) {
+        let child = DetailWeatherCoordinator(navigationController: navigationController, selectedCity: city)
+        child.parentsCoordinator = self
+        childCoordinators.append(child)
+        child.start()
+    }
+
 
 
 }

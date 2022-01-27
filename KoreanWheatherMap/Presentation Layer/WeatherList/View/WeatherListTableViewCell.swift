@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class WeatherListTableViewCell: UITableViewCell {
-    
+
     let cityTitleLabel = UILabel()
     let iconImageView = UIImageView()
     let temperatureLabel = UILabel()
@@ -33,9 +33,7 @@ class WeatherListTableViewCell: UITableViewCell {
         cityTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         cityTitleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         cityTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        cityTitleLabel.minimumScaleFactor = cityTitleLabel.frame.width
-
-//        cityTitleLabel.widthAnchor.constraint(equalToConstant: 110).isActive = true
+        cityTitleLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
 //        cityTitleLabel.sizeToFit()
         cityTitleLabel.textColor = .black
         
@@ -45,8 +43,9 @@ class WeatherListTableViewCell: UITableViewCell {
         self.addSubview(iconImageView)
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
-        iconImageView.leadingAnchor.constraint(equalTo: cityTitleLabel.trailingAnchor, constant: 10).isActive = true
+        iconImageView.leadingAnchor.constraint(equalTo: cityTitleLabel.trailingAnchor).isActive = true
         iconImageView.contentMode = .scaleAspectFit
+        
 
     }
     
@@ -55,7 +54,7 @@ class WeatherListTableViewCell: UITableViewCell {
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         temperatureLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10).isActive = true
-        
+        temperatureLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
 
     }
     
@@ -63,7 +62,7 @@ class WeatherListTableViewCell: UITableViewCell {
         self.addSubview(humidityLabel)
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        humidityLabel.leadingAnchor.constraint(equalTo: temperatureLabel.trailingAnchor, constant: 10).isActive = true
+        humidityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
 
     }
     

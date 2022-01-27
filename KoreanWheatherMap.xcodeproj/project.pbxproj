@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C21CDD927A2CCE600ACB114 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDD827A2CCE600ACB114 /* LoadingView.swift */; };
+		7C21CDDC27A2D77B00ACB114 /* DetailWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDDB27A2D77B00ACB114 /* DetailWeatherViewController.swift */; };
+		7C21CDE027A2D7B800ACB114 /* DetailWeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDDF27A2D7B800ACB114 /* DetailWeatherCoordinator.swift */; };
+		7C21CDE427A2D81100ACB114 /* DetailWeatherDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDE327A2D81100ACB114 /* DetailWeatherDIContainer.swift */; };
+		7C21CDE627A2D88700ACB114 /* DetailWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDE527A2D88700ACB114 /* DetailWeatherViewModel.swift */; };
+		7C21CDE827A2F19600ACB114 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDE727A2F19600ACB114 /* Extension.swift */; };
 		7C9B9D9527A144ED0046F22C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9D9427A144ED0046F22C /* AppDelegate.swift */; };
 		7C9B9D9727A144ED0046F22C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9D9627A144ED0046F22C /* SceneDelegate.swift */; };
 		7C9B9D9927A144ED0046F22C /* WeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9D9827A144ED0046F22C /* WeatherListViewController.swift */; };
@@ -22,11 +28,18 @@
 		7C9B9DC527A1800A0046F22C /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9DC427A1800A0046F22C /* WeatherModel.swift */; };
 		7C9B9DC727A180DA0046F22C /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9DC627A180DA0046F22C /* CityModel.swift */; };
 		7C9B9DC927A186300046F22C /* FetchKoreanWeatherUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9DC827A186300046F22C /* FetchKoreanWeatherUseCase.swift */; };
+		7CD7382927A2A35E005B0221 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7382827A2A35E005B0221 /* Extensions.swift */; };
 		8E32793C0BF4E62F0E6F3A20 /* Pods_KoreanWheatherMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7B18239619A3D709277BAF /* Pods_KoreanWheatherMap.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		592C44A42018D857EFE0CA36 /* Pods-KoreanWheatherMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KoreanWheatherMap.debug.xcconfig"; path = "Target Support Files/Pods-KoreanWheatherMap/Pods-KoreanWheatherMap.debug.xcconfig"; sourceTree = "<group>"; };
+		7C21CDD827A2CCE600ACB114 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		7C21CDDB27A2D77B00ACB114 /* DetailWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherViewController.swift; sourceTree = "<group>"; };
+		7C21CDDF27A2D7B800ACB114 /* DetailWeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherCoordinator.swift; sourceTree = "<group>"; };
+		7C21CDE327A2D81100ACB114 /* DetailWeatherDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherDIContainer.swift; sourceTree = "<group>"; };
+		7C21CDE527A2D88700ACB114 /* DetailWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherViewModel.swift; sourceTree = "<group>"; };
+		7C21CDE727A2F19600ACB114 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		7C9B9D9127A144ED0046F22C /* KoreanWheatherMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KoreanWheatherMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C9B9D9427A144ED0046F22C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C9B9D9627A144ED0046F22C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +57,7 @@
 		7C9B9DC427A1800A0046F22C /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		7C9B9DC627A180DA0046F22C /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		7C9B9DC827A186300046F22C /* FetchKoreanWeatherUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchKoreanWeatherUseCase.swift; sourceTree = "<group>"; };
+		7CD7382827A2A35E005B0221 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C9588F715CE7C984B9C0A0AA /* Pods-KoreanWheatherMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KoreanWheatherMap.release.xcconfig"; path = "Target Support Files/Pods-KoreanWheatherMap/Pods-KoreanWheatherMap.release.xcconfig"; sourceTree = "<group>"; };
 		FD7B18239619A3D709277BAF /* Pods_KoreanWheatherMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KoreanWheatherMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -66,6 +80,58 @@
 				FD7B18239619A3D709277BAF /* Pods_KoreanWheatherMap.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C21CDD727A2CCD500ACB114 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDD827A2CCE600ACB114 /* LoadingView.swift */,
+				7C21CDE727A2F19600ACB114 /* Extension.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7C21CDDA27A2D75F00ACB114 /* DetailWeather */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDDE27A2D7A400ACB114 /* Coordinator */,
+				7C21CDE227A2D7F800ACB114 /* DIContainer */,
+				7C21CDDD27A2D79B00ACB114 /* View */,
+				7C21CDE127A2D7EB00ACB114 /* ViewModel */,
+			);
+			path = DetailWeather;
+			sourceTree = "<group>";
+		};
+		7C21CDDD27A2D79B00ACB114 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDDB27A2D77B00ACB114 /* DetailWeatherViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7C21CDDE27A2D7A400ACB114 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDDF27A2D7B800ACB114 /* DetailWeatherCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7C21CDE127A2D7EB00ACB114 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDE527A2D88700ACB114 /* DetailWeatherViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7C21CDE227A2D7F800ACB114 /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDE327A2D81100ACB114 /* DetailWeatherDIContainer.swift */,
+			);
+			path = DIContainer;
 			sourceTree = "<group>";
 		};
 		7C9B9D8827A144ED0046F22C = {
@@ -96,6 +162,7 @@
 				7C9B9D9D27A144EF0046F22C /* Assets.xcassets */,
 				7C9B9D9F27A144EF0046F22C /* LaunchScreen.storyboard */,
 				7C9B9DA227A144EF0046F22C /* Info.plist */,
+				7CD7382827A2A35E005B0221 /* Extensions.swift */,
 			);
 			path = KoreanWheatherMap;
 			sourceTree = "<group>";
@@ -103,7 +170,9 @@
 		7C9B9DAE27A177480046F22C /* Presentation Layer */ = {
 			isa = PBXGroup;
 			children = (
+				7C21CDD727A2CCD500ACB114 /* Utils */,
 				7C9B9DAF27A177590046F22C /* WeatherList */,
+				7C21CDDA27A2D75F00ACB114 /* DetailWeather */,
 			);
 			path = "Presentation Layer";
 			sourceTree = "<group>";
@@ -340,15 +409,22 @@
 				7C9B9DB827A17A8D0046F22C /* WeatherListTableViewCell.swift in Sources */,
 				7C9B9D9927A144ED0046F22C /* WeatherListViewController.swift in Sources */,
 				7C9B9DAD27A1552C0046F22C /* WeatherListCoordinator.swift in Sources */,
+				7C21CDE427A2D81100ACB114 /* DetailWeatherDIContainer.swift in Sources */,
 				7C9B9DAB27A153290046F22C /* APIService.swift in Sources */,
 				7C9B9DC127A17C710046F22C /* WeatherListDIContainer.swift in Sources */,
 				7C9B9D9527A144ED0046F22C /* AppDelegate.swift in Sources */,
 				7C9B9DA927A1479C0046F22C /* WeatherFromAPIEntity.swift in Sources */,
+				7C21CDD927A2CCE600ACB114 /* LoadingView.swift in Sources */,
 				7C9B9DC727A180DA0046F22C /* CityModel.swift in Sources */,
+				7C21CDDC27A2D77B00ACB114 /* DetailWeatherViewController.swift in Sources */,
 				7C9B9DC927A186300046F22C /* FetchKoreanWeatherUseCase.swift in Sources */,
 				7C9B9D9727A144ED0046F22C /* SceneDelegate.swift in Sources */,
 				7C9B9DB127A177A00046F22C /* Coordinator.swift in Sources */,
+				7C21CDE827A2F19600ACB114 /* Extension.swift in Sources */,
+				7C21CDE627A2D88700ACB114 /* DetailWeatherViewModel.swift in Sources */,
 				7C9B9DC527A1800A0046F22C /* WeatherModel.swift in Sources */,
+				7C21CDE027A2D7B800ACB114 /* DetailWeatherCoordinator.swift in Sources */,
+				7CD7382927A2A35E005B0221 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +566,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BAC795627G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KoreanWheatherMap/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -517,6 +594,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BAC795627G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KoreanWheatherMap/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

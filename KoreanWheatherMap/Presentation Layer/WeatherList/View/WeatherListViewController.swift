@@ -32,8 +32,13 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
         setupBackground()
         setupWeatherListTableView()
         
+        setupBindind()
+        viewModel.fetchWeather()
+    }
+    
+    func setupBindind() {
         bindWeatherListTableView()
-        
+        bindLoading()
     }
     
     func setupBackground() {
@@ -54,27 +59,13 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func bindWeatherListTableView() {
-        
-        
-        
-        
         viewModel.weatherObserVable
             .bind(to: weatherListTableView.rx.items(cellIdentifier: "Cell", cellType: WeatherListTableViewCell.self)) {index, item, cell in
                 
                 cell.cityTitleLabel.text = item.cityKorean
-                cell.temperatureLabel.text = "\(item.currentTemperature)"
+                cell.temperatureLabel.text = "\(item.currentTemperature.celsius)"
                 cell.humidityLabel.text = "\(item.currentHumidity)"
-                
-                do
-                {
-                    let url = URL(string:"http://openweathermap.org/img/wn/\(item.weatherIcon)@2x.png")
-                    let data = try Data(contentsOf: url!)
-                    cell.iconImageView.image = UIImage(data: data)
-                }
-                catch
-                {
-                    
-                }
+                cell.iconImageView.image = UIImage(data: item.weatherIcon)
             }
             .disposed(by: disposeBag)
         
@@ -85,10 +76,28 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
         weatherListTableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.weatherListTableView.deselectRow(at: indexPath, animated: false)
-                
+                guard let selectedCity = self?.viewModel.findCity(indexPath: indexPath) else { return }
+
+                self?.coordinator?.pushDetailWeatherView(city: selectedCity)
             })
             .disposed(by: disposeBag)
-        
     }
+    
+    func bindLoading() {
+        viewModel.loading
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] state in
+                switch state {
+                case .startLoading:
+                    weatherListTableView.isHidden = true
+                    LoadingView.showLoading()
+                case .finishLoading:
+                    weatherListTableView.isHidden = false
+                    LoadingView.hideLoading()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
 }
 

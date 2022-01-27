@@ -8,7 +8,7 @@
 import Foundation
 
 struct WeatherModel {
-    static let empty: Self = .init(cityKorean: "", cityEnglish: "", currentTemperature: 0, currentHumidity: 0, sensibleTemperature: 0, minimumTemperature: 0, maximumTemperature: 0, atmosphericPressure: 0, windSpeed: 0, weatherDescription: "", weatherIcon: "")
+    static let empty: Self = .init(cityKorean: "", cityEnglish: "", currentTemperature: 0, currentHumidity: 0, sensibleTemperature: 0, minimumTemperature: 0, maximumTemperature: 0, atmosphericPressure: 0, windSpeed: 0, weatherDescription: "", weatherIcon: Data())
     
     var cityKorean: String
     var cityEnglish: String
@@ -20,7 +20,7 @@ struct WeatherModel {
     var atmosphericPressure: Double
     var windSpeed: Double
     var weatherDescription: String
-    var weatherIcon: String
+    var weatherIcon: Data
     
     init (cityKorean: String,
           cityEnglish: String,
@@ -32,7 +32,7 @@ struct WeatherModel {
           atmosphericPressure: Double,
           windSpeed: Double,
           weatherDescription: String,
-          weatherIcon: String) {
+          weatherIcon: Data) {
         
         self.cityKorean = cityKorean
         self.cityEnglish = cityEnglish

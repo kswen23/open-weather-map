@@ -39,19 +39,21 @@ class FetchKoreanWeatherUseCase {
                     if let wind = $0.wind {
                         tempWeather.windSpeed = wind.windSpeed
                     }
-                   
+                    
                     if let weather = $0.weather {
                         weather.forEach {
                             tempWeather.weatherDescription = $0.description
-                            tempWeather.weatherIcon = $0.icon
+                            do {
+                                let url = URL(string:"http://openweathermap.org/img/wn/\($0.icon)@2x.png")
+                                let data = try Data(contentsOf: url!)
+                                tempWeather.weatherIcon = data
+                            } catch { return }
                         }
                     }
-                    
                     self.tempWeatherModel.append(tempWeather)
                     self.weatherModelsObserVable.onNext(self.tempWeatherModel)
                 })
                 .disposed(by: disposeBag)
         }
     }
-    
 }
