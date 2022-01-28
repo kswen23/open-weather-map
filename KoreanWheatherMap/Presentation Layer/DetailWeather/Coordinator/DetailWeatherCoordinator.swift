@@ -28,6 +28,13 @@ class DetailWeatherCoordinator: NSObject, Coordinator, UINavigationControllerDel
         self.navigationController.pushViewController(viewController, animated: true)
     }
     
+    func pushWeatherForecastView(city: String) {
+        let child = WeatherForecastCoordinator(navigationController: navigationController, selectedCity: city)
+        child.parentsCoordinator = self
+        childCoordinators.append(child)
+        child.start()
+    }
+    
     func childDidFinish(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
@@ -47,9 +54,9 @@ class DetailWeatherCoordinator: NSObject, Coordinator, UINavigationControllerDel
             return
         }
 
-//        if let detailWeatherViewController = fromViewController as? DetailWeatherViewController {
-//            childDidFinish(detailWeatherViewController.coordinator)
-//        }
+        if let weatherForecastViewController = fromViewController as? DetailWeatherViewController {
+            childDidFinish(weatherForecastViewController.coordinator)
+        }
     }
 
 

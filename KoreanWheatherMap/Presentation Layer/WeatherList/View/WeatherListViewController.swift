@@ -66,11 +66,10 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
     }
     @objc func pullToRefresh() {
         viewModel.fetchWeather()
-        
+        weatherListTableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.refreshControl.endRefreshing()
         }
-        
     }
     
     func bindWeatherListTableView() {

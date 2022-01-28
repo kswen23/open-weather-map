@@ -13,6 +13,10 @@
 		7C21CDE427A2D81100ACB114 /* DetailWeatherDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDE327A2D81100ACB114 /* DetailWeatherDIContainer.swift */; };
 		7C21CDE627A2D88700ACB114 /* DetailWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDE527A2D88700ACB114 /* DetailWeatherViewModel.swift */; };
 		7C21CDE827A2F19600ACB114 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDE727A2F19600ACB114 /* Extension.swift */; };
+		7C21CDEF27A38A9D00ACB114 /* WeatherForecastCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDEE27A38A9D00ACB114 /* WeatherForecastCoordinator.swift */; };
+		7C21CDF127A38AA700ACB114 /* WeatherForecastDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDF027A38AA700ACB114 /* WeatherForecastDIContainer.swift */; };
+		7C21CDF327A38AB100ACB114 /* WeatherForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDF227A38AB100ACB114 /* WeatherForecastViewController.swift */; };
+		7C21CDF527A38ABA00ACB114 /* WeatherForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21CDF427A38ABA00ACB114 /* WeatherForecastViewModel.swift */; };
 		7C9B9D9527A144ED0046F22C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9D9427A144ED0046F22C /* AppDelegate.swift */; };
 		7C9B9D9727A144ED0046F22C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9D9627A144ED0046F22C /* SceneDelegate.swift */; };
 		7C9B9D9927A144ED0046F22C /* WeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B9D9827A144ED0046F22C /* WeatherListViewController.swift */; };
@@ -40,6 +44,10 @@
 		7C21CDE327A2D81100ACB114 /* DetailWeatherDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherDIContainer.swift; sourceTree = "<group>"; };
 		7C21CDE527A2D88700ACB114 /* DetailWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherViewModel.swift; sourceTree = "<group>"; };
 		7C21CDE727A2F19600ACB114 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		7C21CDEE27A38A9D00ACB114 /* WeatherForecastCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastCoordinator.swift; sourceTree = "<group>"; };
+		7C21CDF027A38AA700ACB114 /* WeatherForecastDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastDIContainer.swift; sourceTree = "<group>"; };
+		7C21CDF227A38AB100ACB114 /* WeatherForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastViewController.swift; sourceTree = "<group>"; };
+		7C21CDF427A38ABA00ACB114 /* WeatherForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastViewModel.swift; sourceTree = "<group>"; };
 		7C9B9D9127A144ED0046F22C /* KoreanWheatherMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KoreanWheatherMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C9B9D9427A144ED0046F22C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C9B9D9627A144ED0046F22C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +142,49 @@
 			path = DIContainer;
 			sourceTree = "<group>";
 		};
+		7C21CDE927A38A4B00ACB114 /* WeatherForecast */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDEA27A38A6B00ACB114 /* Coordinator */,
+				7C21CDEB27A38A7200ACB114 /* DIContainer */,
+				7C21CDED27A38A7E00ACB114 /* View */,
+				7C21CDEC27A38A7800ACB114 /* ViewModel */,
+			);
+			path = WeatherForecast;
+			sourceTree = "<group>";
+		};
+		7C21CDEA27A38A6B00ACB114 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDEE27A38A9D00ACB114 /* WeatherForecastCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7C21CDEB27A38A7200ACB114 /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDF027A38AA700ACB114 /* WeatherForecastDIContainer.swift */,
+			);
+			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		7C21CDEC27A38A7800ACB114 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDF427A38ABA00ACB114 /* WeatherForecastViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7C21CDED27A38A7E00ACB114 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C21CDF227A38AB100ACB114 /* WeatherForecastViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7C9B9D8827A144ED0046F22C = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +224,7 @@
 				7C21CDD727A2CCD500ACB114 /* Utils */,
 				7C9B9DAF27A177590046F22C /* WeatherList */,
 				7C21CDDA27A2D75F00ACB114 /* DetailWeather */,
+				7C21CDE927A38A4B00ACB114 /* WeatherForecast */,
 			);
 			path = "Presentation Layer";
 			sourceTree = "<group>";
@@ -411,12 +463,16 @@
 				7C9B9DAD27A1552C0046F22C /* WeatherListCoordinator.swift in Sources */,
 				7C21CDE427A2D81100ACB114 /* DetailWeatherDIContainer.swift in Sources */,
 				7C9B9DAB27A153290046F22C /* APIService.swift in Sources */,
+				7C21CDF327A38AB100ACB114 /* WeatherForecastViewController.swift in Sources */,
 				7C9B9DC127A17C710046F22C /* WeatherListDIContainer.swift in Sources */,
 				7C9B9D9527A144ED0046F22C /* AppDelegate.swift in Sources */,
 				7C9B9DA927A1479C0046F22C /* WeatherFromAPIEntity.swift in Sources */,
 				7C21CDD927A2CCE600ACB114 /* LoadingView.swift in Sources */,
+				7C21CDF127A38AA700ACB114 /* WeatherForecastDIContainer.swift in Sources */,
+				7C21CDF527A38ABA00ACB114 /* WeatherForecastViewModel.swift in Sources */,
 				7C9B9DC727A180DA0046F22C /* CityModel.swift in Sources */,
 				7C21CDDC27A2D77B00ACB114 /* DetailWeatherViewController.swift in Sources */,
+				7C21CDEF27A38A9D00ACB114 /* WeatherForecastCoordinator.swift in Sources */,
 				7C9B9DC927A186300046F22C /* FetchKoreanWeatherUseCase.swift in Sources */,
 				7C9B9D9727A144ED0046F22C /* SceneDelegate.swift in Sources */,
 				7C9B9DB127A177A00046F22C /* Coordinator.swift in Sources */,

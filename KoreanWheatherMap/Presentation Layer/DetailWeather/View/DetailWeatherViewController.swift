@@ -143,7 +143,7 @@ class DetailWeatherViewController: UIViewController {
         weatherForecastButton.addTarget(self, action: #selector(weatherForeCast), for: .touchUpInside)
     }
     @objc func weatherForeCast() {
-        print("go")
+        coordinator?.pushWeatherForecastView(city: viewModel.detailWeather.cityEnglish)
     }
 
     required init?(coder: NSCoder) {
