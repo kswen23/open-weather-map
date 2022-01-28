@@ -55,7 +55,7 @@ class WeatherListTableViewCell: UITableViewCell {
         temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         temperatureLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10).isActive = true
         temperatureLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
-
+        temperatureLabel.textColor = .black
     }
     
     func setupHumidityLabel() {
@@ -63,7 +63,7 @@ class WeatherListTableViewCell: UITableViewCell {
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         humidityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
-
+        humidityLabel.textColor = .black
     }
     
     required init?(coder: NSCoder) {

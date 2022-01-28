@@ -15,6 +15,7 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
     weak var coordinator: WeatherListCoordinator?
     var viewModel: WeatherListViewModel
     let weatherListTableView = UITableView()
+    var refreshControl = UIRefreshControl()
     let disposeBag = DisposeBag()
     
     init(viewModel: WeatherListViewModel) {
@@ -31,6 +32,7 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
         
         setupBackground()
         setupWeatherListTableView()
+        setupRefreshControl()
         
         setupBindind()
         viewModel.fetchWeather()
@@ -58,13 +60,26 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
         weatherListTableView.register(WeatherListTableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
+    func setupRefreshControl() {
+        weatherListTableView.refreshControl = refreshControl
+        weatherListTableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+    }
+    @objc func pullToRefresh() {
+        viewModel.fetchWeather()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.refreshControl.endRefreshing()
+        }
+        
+    }
+    
     func bindWeatherListTableView() {
         viewModel.weatherObserVable
             .bind(to: weatherListTableView.rx.items(cellIdentifier: "Cell", cellType: WeatherListTableViewCell.self)) {index, item, cell in
                 
                 cell.cityTitleLabel.text = item.cityKorean
-                cell.temperatureLabel.text = "\(item.currentTemperature.celsius)"
-                cell.humidityLabel.text = "\(item.currentHumidity)"
+                cell.temperatureLabel.text = "\(item.currentTemperature.celsius.roundDecimal(to: 2))℃"
+                cell.humidityLabel.text = "\(item.currentHumidity)%"
                 cell.iconImageView.image = UIImage(data: item.weatherIcon)
             }
             .disposed(by: disposeBag)
@@ -77,7 +92,7 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
             .subscribe(onNext: { [weak self] indexPath in
                 self?.weatherListTableView.deselectRow(at: indexPath, animated: false)
                 guard let selectedCity = self?.viewModel.findCity(indexPath: indexPath) else { return }
-
+                
                 self?.coordinator?.pushDetailWeatherView(city: selectedCity)
             })
             .disposed(by: disposeBag)
@@ -98,6 +113,6 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
             })
             .disposed(by: disposeBag)
     }
-
+    
 }
 
