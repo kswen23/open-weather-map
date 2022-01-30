@@ -20,7 +20,8 @@ class WeatherForecastDIContainer {
     }
     
     func makeWeatherForecastViewModel() -> WeatherForecastViewModel {
-        return WeatherForecastViewModel(detailWeather: selectedCity)
+        let fetchForecastUsecase = FetchWeatherForeCastUsecase()
+        return WeatherForecastViewModel(selectedCity: selectedCity, fetchForecastUsecase: fetchForecastUsecase)
     }
     
 }

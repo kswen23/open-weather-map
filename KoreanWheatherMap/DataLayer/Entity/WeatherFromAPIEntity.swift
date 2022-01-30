@@ -24,7 +24,7 @@ struct temperature: Codable {
     let minimumTemperature: Double
     let maximumTemperature: Double
     let pressure: Double
-    let humidity: Double
+    let humidity: Int
     
     enum CodingKeys: String, CodingKey {
         case currentTemperature = "temp"

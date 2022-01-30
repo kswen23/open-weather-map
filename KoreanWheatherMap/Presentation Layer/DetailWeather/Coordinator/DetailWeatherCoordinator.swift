@@ -26,6 +26,7 @@ class DetailWeatherCoordinator: NSObject, Coordinator, UINavigationControllerDel
         let viewController = diContainer.makeDetailWeatherViewController(coordinaitor: self)
         viewController.coordinator = self
         self.navigationController.pushViewController(viewController, animated: true)
+        
     }
     
     func pushWeatherForecastView(city: String) {

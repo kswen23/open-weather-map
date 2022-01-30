@@ -8,77 +8,83 @@
 import Foundation
 import UIKit
 
+import RxSwift
+
 class WeatherForecastViewController: UIViewController {
     
     weak var coordinator: WeatherForecastCoordinator?
     
     var viewModel: WeatherForecastViewModel
     
-    let graphScrollView = UIScrollView()
-    let view2 = UIView()
-    class view1: UIView {
-        override func draw(_ rect: CGRect) {
-            let path = UIBezierPath()
-            path.lineWidth = 1
-            path.lineJoinStyle = .round
-            path.move(to: CGPoint(x: 20, y: 500))
-            path.addLine(to: CGPoint(x: 40, y: 450))
-            path.addLine(to: CGPoint(x: 60, y: 400))
-            path.addLine(to: CGPoint(x: 80, y: 300))
-            path.addLine(to: CGPoint(x: 100, y: 600))
-            path.addLine(to: CGPoint(x: 120, y: 400))
-            path.addLine(to: CGPoint(x: 140, y: 430))
-            path.addLine(to: CGPoint(x: 160, y: 450))
-            path.addLine(to: CGPoint(x: 180, y: 450))
-            UIColor.systemRed.set()
-            path.stroke()
-        }
-    }
+    let scrollView = UIScrollView()
+    
+    let disposeBag = DisposeBag()
+    
     init(viewModel: WeatherForecastViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
+        view.backgroundColor = .white
         
-        setupGraphScrollView()
-        let view1 = view1(frame: self.view.frame)
-        view1.backgroundColor = .clear
-        self.view.addSubview(view1)
-        setView()
-        
-        
+        setupScrollView()
+
+        setupBindind()
+        viewModel.fetch()
     }
     
-    func setupGraphScrollView() {
-        view.addSubview(graphScrollView)
-        graphScrollView.translatesAutoresizingMaskIntoConstraints = false
-        graphScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        graphScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        graphScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        graphScrollView.heightAnchor.constraint(equalToConstant: 400).isActive = true
-        graphScrollView.backgroundColor = .white
-        graphScrollView.contentSize = CGSize(width: view.frame.width * 11, height: 400)
-        graphScrollView.indicatorStyle = .white
-        graphScrollView.showsHorizontalScrollIndicator = true
+    func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        scrollView.backgroundColor = .white
+        scrollView.contentSize = CGSize(width: view.frame.width * 7, height: scrollView.frame.height)
+        scrollView.indicatorStyle = .white
+        scrollView.showsHorizontalScrollIndicator = true
     }
     
-    func setView() {
-        self.graphScrollView.addSubview(view2)
-        view2.translatesAutoresizingMaskIntoConstraints = false
-        view2.topAnchor.constraint(equalTo: graphScrollView.topAnchor).isActive = true
-        view2.leadingAnchor.constraint(equalTo: graphScrollView.leadingAnchor).isActive = true
-//        view1.trailingAnchor.constraint(equalTo: graphScrollView.trailingAnchor).isActive = true
-        view2.widthAnchor.constraint(equalToConstant: self.view.frame.width*10).isActive = true
-        view2.heightAnchor.constraint(equalTo: self.graphScrollView.heightAnchor).isActive = true
-
-        view2.backgroundColor = .blue
-
+    func setupBindind() {
+        bindGraphView()
+        bindLoading()
+    }
+    
+    func bindGraphView() {
+        viewModel.forecastModelObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [self]  in
+                let weatherGraphView = WeatherGraphView(frame: CGRect(), maximumTemperatureValues: $0.maximumTemperatures, minimumTemperatureValues: $0.minimumTemperatures, humidityValues: $0.humidities, timeValues: $0.times)
+                self.scrollView.addSubview(weatherGraphView)
+                weatherGraphView.translatesAutoresizingMaskIntoConstraints = false
+                weatherGraphView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+                weatherGraphView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+                weatherGraphView.widthAnchor.constraint(equalToConstant: self.view.frame.width*7).isActive = true
+                weatherGraphView.heightAnchor.constraint(equalTo: self.scrollView.heightAnchor).isActive = true
+                
+                weatherGraphView.backgroundColor = .white
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindLoading() {
+        viewModel.loading
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] state in
+                switch state {
+                case .startLoading:
+                    LoadingView.showLoading()
+                case .finishLoading:
+                    LoadingView.hideLoading()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

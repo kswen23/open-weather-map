@@ -14,9 +14,9 @@ enum LoadingState {
     case finishLoading
 }
 class WeatherListViewModel {
-    var fetchKoreanWeatherUseCase: FetchKoreanWeatherUseCase
+    var fetchKoreanWeatherUseCase: FetchWeatherUseCase
     
-    init(fetchKoreanWeatherUseCase: FetchKoreanWeatherUseCase) {
+    init(fetchKoreanWeatherUseCase: FetchWeatherUseCase) {
         self.fetchKoreanWeatherUseCase = fetchKoreanWeatherUseCase
         bindWeatherModels()
     }

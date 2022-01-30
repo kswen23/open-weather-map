@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-class FetchKoreanWeatherUseCase {
+class FetchWeatherUseCase {
     let cities = CityModel.cities
     
     let weatherModelsObserVable = PublishSubject<[WeatherModel]>()
@@ -17,8 +17,9 @@ class FetchKoreanWeatherUseCase {
     
     let disposeBag = DisposeBag()
     func fetchKoreanWeather() {
+        tempWeatherModel.removeAll()
         cities.forEach { city in
-            APIService.fetchWeatherRx(city: city.english)
+            WeatherAPIService.fetchWeatherRx(city: city.english)
                 .map { data in
                     try JSONDecoder().decode(WeatherFromAPIEntity.self, from: data) }
                 .subscribe(onNext: { [self] in

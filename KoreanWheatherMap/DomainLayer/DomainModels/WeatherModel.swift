@@ -13,7 +13,7 @@ struct WeatherModel {
     var cityKorean: String
     var cityEnglish: String
     var currentTemperature: Double
-    var currentHumidity: Double
+    var currentHumidity: Int
     var sensibleTemperature: Double
     var minimumTemperature: Double
     var maximumTemperature: Double
@@ -25,7 +25,7 @@ struct WeatherModel {
     init (cityKorean: String,
           cityEnglish: String,
           currentTemperature: Double,
-          currentHumidity: Double,
+          currentHumidity: Int,
           sensibleTemperature: Double,
           minimumTemperature: Double,
           maximumTemperature: Double,
