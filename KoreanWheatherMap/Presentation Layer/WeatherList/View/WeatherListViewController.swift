@@ -6,16 +6,22 @@
 //
 
 import UIKit
+import CoreLocation
 
 import RxSwift
 import RxCocoa
 
-class WeatherListViewController: UIViewController, UIScrollViewDelegate {
+class WeatherListViewController: UIViewController, UIScrollViewDelegate, CLLocationManagerDelegate {
     
     weak var coordinator: WeatherListCoordinator?
     var viewModel: WeatherListViewModel
     let weatherListTableView = UITableView()
     var refreshControl = UIRefreshControl()
+    var filterButton = UIButton()
+    
+    let locationManger = CLLocationManager()
+    var myLocation: CLLocation?
+    
     let disposeBag = DisposeBag()
     
     init(viewModel: WeatherListViewModel) {
@@ -31,8 +37,10 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         setupBackground()
+        setupNavigationFilterButton()
         setupWeatherListTableView()
         setupRefreshControl()
+        setupLocationManager()
         
         setupBindind()
         viewModel.fetchWeather()
@@ -47,6 +55,24 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
         view.backgroundColor = .white
         self.navigationItem.title = viewModel.navigationItemTitle
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+    }
+    
+    func setupNavigationFilterButton() {
+        filterButton.setTitle("Filter", for: .normal)
+        filterButton.setTitleColor(.systemBlue, for: .normal)
+        filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        let navigationBarButton = UIBarButtonItem(customView: filterButton)
+        self.navigationItem.rightBarButtonItem = navigationBarButton
+    }
+    
+    @objc func filterButtonTapped() {
+        let filterViewController = FilterViewController(viewModel: self.viewModel)
+        filterViewController.modalPresentationStyle = .custom
+        filterViewController.transitioningDelegate = self
+        self.present(filterViewController, animated: true, completion: nil)
+        if let location = myLocation {
+            viewModel.bindFilter(location: location)
+        }
     }
     
     func setupWeatherListTableView() {
@@ -72,8 +98,22 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    func setupLocationManager() {
+        
+        locationManger.delegate = self
+        locationManger.desiredAccuracy = kCLLocationAccuracyBest
+        locationManger.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManger.startUpdatingLocation()
+            myLocation = locationManger.location
+        } else {
+            print("위치 서비스 Off 상태")
+        }
+    }
+    
     func bindWeatherListTableView() {
-        viewModel.weatherObserVable
+        viewModel.weatherViewModelObserVable
             .bind(to: weatherListTableView.rx.items(cellIdentifier: "Cell", cellType: WeatherListTableViewCell.self)) {index, item, cell in
                 
                 cell.cityTitleLabel.text = item.cityKorean
@@ -115,3 +155,9 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
     
 }
 
+extension WeatherListViewController: UIViewControllerTransitioningDelegate {
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        FilterPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}

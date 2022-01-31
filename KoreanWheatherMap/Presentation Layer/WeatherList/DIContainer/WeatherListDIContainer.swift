@@ -16,7 +16,9 @@ class WeatherListDIContainer {
     
     func makeWeatherListViewModel() -> WeatherListViewModel {
         let fetchWeatherUseCase = FetchWeatherUseCase()
-        return WeatherListViewModel(fetchKoreanWeatherUseCase: fetchWeatherUseCase)
+        let filterUseCase = FilterUseCase()
+        return WeatherListViewModel(fetchKoreanWeatherUseCase: fetchWeatherUseCase,
+                                    filterUseCase: filterUseCase)
     }
     
 }

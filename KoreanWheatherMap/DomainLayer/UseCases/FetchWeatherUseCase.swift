@@ -13,11 +13,11 @@ class FetchWeatherUseCase {
     let cities = CityModel.cities
     
     let weatherModelsObserVable = PublishSubject<[WeatherModel]>()
-    var tempWeatherModel: [WeatherModel] = []
+    var tempWeatherModels: [WeatherModel] = []
     
     let disposeBag = DisposeBag()
     func fetchKoreanWeather() {
-        tempWeatherModel.removeAll()
+        tempWeatherModels.removeAll()
         cities.forEach { city in
             WeatherAPIService.fetchWeatherRx(city: city.english)
                 .map { data in
@@ -51,10 +51,10 @@ class FetchWeatherUseCase {
                             } catch { return }
                         }
                     }
-                    self.tempWeatherModel.append(tempWeather)
+                    self.tempWeatherModels.append(tempWeather)
                     
-                    if tempWeatherModel.count == cities.count {
-                        let korArr = tempWeatherModel.sorted(by: {$0.cityKorean < $1.cityKorean})
+                    if tempWeatherModels.count == cities.count {
+                        let korArr = tempWeatherModels.sorted(by: {$0.cityKorean < $1.cityKorean})
                         self.weatherModelsObserVable.onNext(korArr)
                     }
                 })

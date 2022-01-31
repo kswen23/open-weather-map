@@ -34,7 +34,6 @@ class WeatherListTableViewCell: UITableViewCell {
         cityTitleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         cityTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         cityTitleLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
-//        cityTitleLabel.sizeToFit()
         cityTitleLabel.textColor = .black
         
     }

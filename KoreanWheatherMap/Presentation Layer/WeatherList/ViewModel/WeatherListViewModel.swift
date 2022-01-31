@@ -8,23 +8,38 @@
 import Foundation
 
 import RxSwift
+import CoreLocation
 
 enum LoadingState {
     case startLoading
     case finishLoading
 }
+enum FilterState {
+    case closest
+    case highestTemperature
+    case lowestTemperature
+    case biggestName
+    case smallestName
+}
+
 class WeatherListViewModel {
     var fetchKoreanWeatherUseCase: FetchWeatherUseCase
+    var filterUseCase: FilterUseCase
     
-    init(fetchKoreanWeatherUseCase: FetchWeatherUseCase) {
+    init(fetchKoreanWeatherUseCase: FetchWeatherUseCase, filterUseCase: FilterUseCase) {
         self.fetchKoreanWeatherUseCase = fetchKoreanWeatherUseCase
-        bindWeatherModels()
+        self.filterUseCase = filterUseCase
+        bindFetchWeatherUsecaseModels()
     }
     
     let navigationItemTitle = "How's the weather?"
     
-    let weatherObserVable = BehaviorSubject<[WeatherModel]>(value: [])
+    let weatherViewModelObserVable = BehaviorSubject<[WeatherModel]>(value: [])
     let loading = PublishSubject<LoadingState>()
+    var weatherModels = [WeatherModel]()
+    
+    var tableViewItems = ["거리가까운 순서", "현재 기온순🔼", "현재 기온순🔽", "도시 이름순🔼", "도시 이름순🔽"]
+    let filterObservable = PublishSubject<FilterState>()
     
     let disposeBag = DisposeBag()
     
@@ -33,10 +48,11 @@ class WeatherListViewModel {
         fetchKoreanWeatherUseCase.fetchKoreanWeather()
     }
     
-    func bindWeatherModels() {
+    func bindFetchWeatherUsecaseModels() {
         fetchKoreanWeatherUseCase.weatherModelsObserVable
             .subscribe(onNext: { [self]  in
-                weatherObserVable.onNext($0)
+                weatherModels = $0
+                weatherViewModelObserVable.onNext($0)
                 loading.onNext(.finishLoading)
             })
             .disposed(by: disposeBag)
@@ -45,7 +61,7 @@ class WeatherListViewModel {
     func findCity(indexPath: IndexPath) -> WeatherModel {
         var selectedCity = WeatherModel.empty
         
-        weatherObserVable
+        weatherViewModelObserVable
             .filter({ !$0.isEmpty })
             .subscribe(onNext: { city in
                 selectedCity = city[indexPath.row]
@@ -55,4 +71,17 @@ class WeatherListViewModel {
         return selectedCity
     }
     
+    func bindFilter(location: CLLocation) {
+        filterObservable
+            .subscribe(onNext: { [self] state in
+                filterUseCase.filter(by: state, models: self.weatherModels, location: location)
+            })
+            .disposed(by: disposeBag)
+        
+        filterUseCase.weatherModelsObserVable
+            .subscribe(onNext: { [self] in
+                weatherViewModelObserVable.onNext($0)
+            })
+            .disposed(by: disposeBag)
+    }
 }
