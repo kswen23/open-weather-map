@@ -52,7 +52,11 @@ class FetchWeatherUseCase {
                         }
                     }
                     self.tempWeatherModel.append(tempWeather)
-                    self.weatherModelsObserVable.onNext(self.tempWeatherModel)
+                    
+                    if tempWeatherModel.count == cities.count {
+                        let korArr = tempWeatherModel.sorted(by: {$0.cityKorean < $1.cityKorean})
+                        self.weatherModelsObserVable.onNext(korArr)
+                    }
                 })
                 .disposed(by: disposeBag)
         }

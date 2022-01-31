@@ -13,8 +13,6 @@ class WeatherGraphView: UIView {
     var minimumTemperatureValues: [Double] = []
     var humidityValues: [Int] = []
     var timeValues: [String] = []
-    
-    var currentX: CGFloat = 30
 
     init(frame: CGRect,
          maximumTemperatureValues: [Double],
@@ -35,12 +33,14 @@ class WeatherGraphView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
 
-        makeTemperatureGraph(value: minimumTemperatureValues, vertical: 0.9, lineColor: .blue)
-        makeTemperatureGraph(value: maximumTemperatureValues, vertical: 0.7, lineColor: .red)
+        makeTemperatureGraph(value: maximumTemperatureValues, vertical: 0.6, lineColor: .red)
+        makeTemperatureGraph(value: minimumTemperatureValues, vertical: 0.8, lineColor: .blue)
+
         makeHumidityGraph(value: humidityValues, lineColor: .black)
     }
     func makeTemperatureGraph(value: [Double], vertical: Double, lineColor: UIColor) {
         let graph = UIBezierPath()
+        var currentX: CGFloat = 30
         let xOffset: CGFloat = (self.frame.width - 2*currentX) / CGFloat(value.count-1)
         let start = CGPoint(x: currentX, y: (self.frame.height * vertical) - value[0]*4)
         graph.move(to: start)
@@ -60,6 +60,7 @@ class WeatherGraphView: UIView {
     
     func makeHumidityGraph(value: [Int], lineColor: UIColor) {
         let graph = UIBezierPath()
+        var currentX: CGFloat = 30
         let xOffset: CGFloat = (self.frame.width - 2*currentX) / CGFloat(value.count-1)
         let halfHeight: CGFloat = (self.frame.height / 2)
         let start = CGPoint(x: currentX, y: halfHeight - CGFloat(value[0]))

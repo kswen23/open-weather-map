@@ -14,6 +14,9 @@ class DetailWeatherViewController: UIViewController {
     
     var viewModel: DetailWeatherViewModel
     
+    var widthConstraint = NSLayoutConstraint()
+    var horizontalWidthConstraint = NSLayoutConstraint()
+    
     init(viewModel: DetailWeatherViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -34,6 +37,14 @@ class DetailWeatherViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            widthConstraint.isActive = false
+            horizontalWidthConstraint.isActive = true
+        }
+    }
+    
     func setupViews() {
         setupBackground()
         setupWeatherIconImageView()
@@ -76,7 +87,7 @@ class DetailWeatherViewController: UIViewController {
         view.addSubview(currentTemperatureLabel)
         currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         currentTemperatureLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50).isActive = true
-        currentTemperatureLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        currentTemperatureLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         currentTemperatureLabel.text = "현재 기온: \(viewModel.detailWeather.currentTemperature.celsius.roundDecimal(to: 2))℃"
         currentTemperatureLabel.textColor = .black
     }
@@ -84,7 +95,7 @@ class DetailWeatherViewController: UIViewController {
         view.addSubview(sensibleTemperatureLabel)
         sensibleTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         sensibleTemperatureLabel.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 10).isActive = true
-        sensibleTemperatureLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        sensibleTemperatureLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         sensibleTemperatureLabel.text = "체감 기온: \(viewModel.detailWeather.sensibleTemperature.celsius.roundDecimal(to: 2))℃"
         sensibleTemperatureLabel.textColor = .black
     }
@@ -92,7 +103,7 @@ class DetailWeatherViewController: UIViewController {
         view.addSubview(maximumTemperatureLabel)
         maximumTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         maximumTemperatureLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50).isActive = true
-        maximumTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        maximumTemperatureLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         maximumTemperatureLabel.text = "최고 기온: \(viewModel.detailWeather.maximumTemperature.celsius.roundDecimal(to: 2))℃"
         maximumTemperatureLabel.textColor = .red
     }
@@ -100,7 +111,7 @@ class DetailWeatherViewController: UIViewController {
         view.addSubview(minimumTemperatureLabel)
         minimumTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         minimumTemperatureLabel.topAnchor.constraint(equalTo: maximumTemperatureLabel.bottomAnchor, constant: 10).isActive = true
-        minimumTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        minimumTemperatureLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         minimumTemperatureLabel.text = "최저 기온: \(viewModel.detailWeather.minimumTemperature.celsius.roundDecimal(to: 2))℃"
         minimumTemperatureLabel.textColor = .blue
     }
@@ -108,7 +119,7 @@ class DetailWeatherViewController: UIViewController {
         view.addSubview(currentHumidityLabel)
         currentHumidityLabel.translatesAutoresizingMaskIntoConstraints = false
         currentHumidityLabel.topAnchor.constraint(equalTo: sensibleTemperatureLabel.bottomAnchor, constant: 10).isActive = true
-        currentHumidityLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        currentHumidityLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         currentHumidityLabel.text = "현재 습도: \(viewModel.detailWeather.currentHumidity)%"
         currentHumidityLabel.textColor = .black
     }
@@ -116,7 +127,7 @@ class DetailWeatherViewController: UIViewController {
         view.addSubview(windSpeedLabel)
         windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
         windSpeedLabel.topAnchor.constraint(equalTo: currentHumidityLabel.bottomAnchor, constant: 10).isActive = true
-        windSpeedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        windSpeedLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         windSpeedLabel.text = "풍속: \(viewModel.detailWeather.windSpeed)m/s"
         windSpeedLabel.textColor = .black
     }
@@ -124,7 +135,7 @@ class DetailWeatherViewController: UIViewController {
         view.addSubview(atmosphericPressureLabel)
         atmosphericPressureLabel.translatesAutoresizingMaskIntoConstraints = false
         atmosphericPressureLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 10).isActive = true
-        atmosphericPressureLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        atmosphericPressureLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         atmosphericPressureLabel.text = "기압: \(viewModel.detailWeather.atmosphericPressure)Pa"
         atmosphericPressureLabel.textColor = .black
     }
@@ -132,9 +143,13 @@ class DetailWeatherViewController: UIViewController {
     func setupWeatherForecastButton() {
         view.addSubview(weatherForecastButton)
         weatherForecastButton.translatesAutoresizingMaskIntoConstraints = false
-        weatherForecastButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
-        weatherForecastButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        weatherForecastButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        weatherForecastButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        widthConstraint = weatherForecastButton.widthAnchor.constraint(equalToConstant: view.frame.width - 20)
+        widthConstraint.isActive = true
+        
+        horizontalWidthConstraint = weatherForecastButton.widthAnchor.constraint(equalToConstant: (view.frame.width) - 20)
+        
+        weatherForecastButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         weatherForecastButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
         weatherForecastButton.backgroundColor = .black
         weatherForecastButton.setTitle("미래날씨", for: .normal)

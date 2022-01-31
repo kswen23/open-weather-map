@@ -18,6 +18,9 @@ class WeatherForecastViewController: UIViewController {
     
     let scrollView = UIScrollView()
     
+    var heightConstraint = NSLayoutConstraint()
+    var horizontalHeightConstraint = NSLayoutConstraint()
+    
     let disposeBag = DisposeBag()
     
     init(viewModel: WeatherForecastViewModel) {
@@ -30,9 +33,20 @@ class WeatherForecastViewController: UIViewController {
         view.backgroundColor = .white
         
         setupScrollView()
-
+        
         setupBindind()
         viewModel.fetch()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            heightConstraint.isActive = false
+            horizontalHeightConstraint.isActive = true
+        } else {
+            horizontalHeightConstraint.isActive = false
+            heightConstraint.isActive = true
+        }
+        viewModel.showGraphView()
     }
     
     func setupScrollView() {
@@ -41,11 +55,14 @@ class WeatherForecastViewController: UIViewController {
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        heightConstraint = scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.7)
+        heightConstraint.isActive = true
+        
+        horizontalHeightConstraint = scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor)
+        
         scrollView.backgroundColor = .white
         scrollView.contentSize = CGSize(width: view.frame.width * 7, height: scrollView.frame.height)
-        scrollView.indicatorStyle = .white
-        scrollView.showsHorizontalScrollIndicator = true
+        scrollView.showsHorizontalScrollIndicator = false
     }
     
     func setupBindind() {
@@ -62,9 +79,8 @@ class WeatherForecastViewController: UIViewController {
                 weatherGraphView.translatesAutoresizingMaskIntoConstraints = false
                 weatherGraphView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
                 weatherGraphView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-                weatherGraphView.widthAnchor.constraint(equalToConstant: self.view.frame.width*7).isActive = true
+                weatherGraphView.widthAnchor.constraint(equalToConstant: scrollView.contentSize.width).isActive = true
                 weatherGraphView.heightAnchor.constraint(equalTo: self.scrollView.heightAnchor).isActive = true
-                
                 weatherGraphView.backgroundColor = .white
             })
             .disposed(by: disposeBag)
@@ -83,7 +99,6 @@ class WeatherForecastViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

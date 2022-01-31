@@ -53,9 +53,9 @@ class WeatherListViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(weatherListTableView)
         weatherListTableView.translatesAutoresizingMaskIntoConstraints = false
         weatherListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        weatherListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        weatherListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        weatherListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        weatherListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        weatherListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        weatherListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         weatherListTableView.backgroundColor = .white
         weatherListTableView.register(WeatherListTableViewCell.self, forCellReuseIdentifier: "Cell")
     }

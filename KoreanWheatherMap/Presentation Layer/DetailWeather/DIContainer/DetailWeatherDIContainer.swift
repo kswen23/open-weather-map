@@ -16,7 +16,6 @@ class DetailWeatherDIContainer {
     }
     
     func makeDetailWeatherViewController(coordinaitor: Coordinator) -> DetailWeatherViewController {
-        
         return DetailWeatherViewController(viewModel: makeDetailWeatherViewModel())
     }
     
