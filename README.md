@@ -1,3 +1,3 @@
 # open-weather-map
-https://docs.google.com/document/d/1q77Vxl3verRWnrAz00Nc2PYrgOUyQYt6p6zFGJHPxJM/edit#
-https://docs.google.com/document/d/1bShJCHpcYBJVBWDPR10PuGq-5J5cPmtek-BqDCNE-uQ/edit
+[Uploading 빗썸코리아_개인정보 수집 및 이용 동의서 - 김성원.pdf…]()
+[Uploading 빗썸테크캠프 iOS코스 지원서 - 김성원.pdf…]()
